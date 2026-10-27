@@ -1,0 +1,309 @@
+:root {
+    --noite: #120d2b;
+    --painel: rgba(26, 18, 62, 0.72);
+    --linha: rgba(200, 188, 255, 0.16);
+    --texto: #f2eeff;
+    --suave: #a79fd0;
+    --lilas: #9b87ff;
+    --rosa: #ff6f91;
+    --rosa-escuro: #ff8aa6;
+    --erro: #ff9aa8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Instrument Sans", "Segoe UI", sans-serif;
+    background: var(--noite);
+    color: var(--texto);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 32px 20px;
+}
+
+/* ---------- Fundo ---------- */
+
+.fundo {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.brilho {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(110px);
+    opacity: 0.55;
+}
+
+.brilho-1 {
+    width: 52vmax;
+    height: 52vmax;
+    background: #5b3bd6;
+    top: -18vmax;
+    left: -12vmax;
+    animation: flutuar-1 28s ease-in-out infinite alternate;
+}
+
+.brilho-2 {
+    width: 44vmax;
+    height: 44vmax;
+    background: #c2305f;
+    bottom: -20vmax;
+    right: -10vmax;
+    opacity: 0.38;
+    animation: flutuar-2 34s ease-in-out infinite alternate;
+}
+
+@keyframes flutuar-1 {
+    to { transform: translate(14vmax, 10vmax) scale(1.15); }
+}
+
+@keyframes flutuar-2 {
+    to { transform: translate(-12vmax, -8vmax) scale(1.1); }
+}
+
+/* ---------- Estrutura ---------- */
+
+.container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1020px;
+}
+
+.cabecalho {
+    margin-bottom: 36px;
+}
+
+h1 {
+    font-family: "Bricolage Grotesque", "Segoe UI", sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.5rem, 7vw, 4.6rem);
+    line-height: 1;
+    letter-spacing: -0.035em;
+    margin-bottom: 14px;
+}
+
+.cabecalho p {
+    color: var(--suave);
+    font-size: 1.1rem;
+    max-width: 46ch;
+}
+
+/* ---------- Painel ---------- */
+
+.painel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: var(--painel);
+    border: 1px solid var(--linha);
+    border-radius: 20px;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 30px 80px rgba(5, 2, 20, 0.5);
+    overflow: hidden;
+}
+
+.lado {
+    padding: 26px 28px;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+}
+
+.lado-origem {
+    border-right: 1px solid var(--linha);
+}
+
+label,
+.resultado h2 {
+    font-family: "Bricolage Grotesque", "Segoe UI", sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--suave);
+    letter-spacing: 0.01em;
+}
+
+label {
+    display: block;
+}
+
+textarea {
+    flex: 1;
+    width: 100%;
+    min-height: 220px;
+    margin-top: 14px;
+    background: transparent;
+    border: none;
+    outline: none;
+    resize: none;
+    color: var(--texto);
+    caret-color: var(--rosa);
+    font-family: inherit;
+    font-size: 1.35rem;
+    line-height: 1.5;
+}
+
+textarea::placeholder {
+    color: rgba(167, 159, 208, 0.5);
+}
+
+.destino-topo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 22px;
+}
+
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: rgba(155, 135, 255, 0.14);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%23c9bfff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 1.5l5 5 5-5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    color: var(--texto);
+    border: 1px solid var(--linha);
+    border-radius: 999px;
+    padding: 9px 38px 9px 18px;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.15s;
+}
+
+select:hover {
+    background-color: rgba(155, 135, 255, 0.24);
+}
+
+select option {
+    background: #1d1642;
+    color: var(--texto);
+}
+
+.resultado {
+    flex: 1;
+}
+
+.resultado h2 {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+}
+
+#traducao {
+    font-size: 1.35rem;
+    line-height: 1.5;
+    color: rgba(167, 159, 208, 0.5);
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+#traducao.pronto {
+    color: var(--texto);
+}
+
+/* ---------- Ações ---------- */
+
+.acoes {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 16px 28px;
+    border-top: 1px solid var(--linha);
+    background: rgba(10, 6, 30, 0.35);
+}
+
+#mensagem {
+    color: var(--erro);
+    font-size: 0.95rem;
+}
+
+button {
+    margin-left: auto;
+    padding: 13px 34px;
+    background: var(--rosa);
+    color: #2b0b19;
+    border: none;
+    border-radius: 999px;
+    font-family: "Bricolage Grotesque", "Segoe UI", sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.15s;
+}
+
+button:hover {
+    background: var(--rosa-escuro);
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
+button:focus-visible,
+select:focus-visible {
+    outline: 2px solid var(--lilas);
+    outline-offset: 3px;
+}
+
+.lado-origem:focus-within label {
+    color: var(--texto);
+}
+
+/* ---------- Mobile ---------- */
+
+@media (max-width: 760px) {
+    body {
+        align-items: flex-start;
+    }
+
+    .painel {
+        grid-template-columns: 1fr;
+    }
+
+    .lado {
+        min-height: 0;
+        padding: 22px 20px;
+    }
+
+    .lado-origem {
+        border-right: none;
+        border-bottom: 1px solid var(--linha);
+    }
+
+    textarea {
+        min-height: 150px;
+    }
+
+    .acoes {
+        padding: 14px 20px;
+        flex-wrap: wrap;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .brilho {
+        animation: none;
+    }
+}

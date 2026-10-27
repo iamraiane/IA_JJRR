@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tradutor Inteligente</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <div class="fundo" aria-hidden="true">
+        <span class="brilho brilho-1"></span>
+        <span class="brilho brilho-2"></span>
+    </div>
+
+    <main class="container">
+        <header class="cabecalho">
+            <h1>Tradutor Inteligente</h1>
+            <p>Traduza seus textos utilizando o Azure AI Translator.</p>
+        </header>
+
+        <section class="painel">
+            <div class="lado lado-origem">
+                <label for="texto">Digite seu texto</label>
+                <textarea
+                    id="texto"
+                    placeholder="Escreva aqui o texto que deseja traduzir..."
+                ></textarea>
+            </div>
+
+            <div class="lado lado-destino">
+                <div class="destino-topo">
+                    <label for="idioma">Traduzir para</label>
+                    <select id="idioma">
+                        <option value="en">Inglês</option>
+                        <option value="es">Espanhol</option>
+                        <option value="fr">Francês</option>
+                        <option value="it">Italiano</option>
+                        <option value="de">Alemão</option>
+                        <option value="pt">Português</option>
+                    </select>
+                </div>
+
+                <div class="resultado" aria-live="polite">
+                    <h2>Tradução</h2>
+                    <p id="traducao">Sua tradução aparecerá aqui.</p>
+                </div>
+            </div>
+
+            <div class="acoes">
+                <p id="mensagem" role="alert"></p>
+                <button id="botao" onclick="traduzirTexto()">Traduzir</button>
+            </div>
+        </section>
+    </main>
+
+    <script src="/static/script.js"></script>
+
+</body>
+</html>
